@@ -1,3 +1,6 @@
 spring:
   application:
     name: teste-pratico-dti-digital-drone-delivery
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/drone_delivery
