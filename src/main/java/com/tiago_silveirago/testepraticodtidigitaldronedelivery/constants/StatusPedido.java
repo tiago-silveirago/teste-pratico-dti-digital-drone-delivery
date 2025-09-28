@@ -5,11 +5,11 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum StatusEntrega {
+public enum StatusPedido {
 
-    AGUARDANDO("AGUARDANDO"),
-    EM_ENTREGA("EM_ENTREGA"),
-    ENTREGUE("ENTREGUE");
+    CRIADO("CRIADO"),
+    EM_ANDAMENTO("EM_ANDAMENTO"),
+    CONCLUIDO("CONCLUIDO");
 
     private final String descricao;
 }

@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,16 +13,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(collection = "drone")
+@Document(collection = "drones")
 public class Drone {
 
     @Id
     private String id;
     private String nome;
-    private String capacidadeCarga;
+    private Double capacidadePeso;
     private Double capacidadeDeslocamento;
     private StatusDrone statusDrone;
 
     @GeoSpatialIndexed
-    private Point localizacaoOrigem;
+    private double[] localizacaoAtual;
 }

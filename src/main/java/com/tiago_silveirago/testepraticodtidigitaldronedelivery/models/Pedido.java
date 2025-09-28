@@ -2,6 +2,7 @@ package com.tiago_silveirago.testepraticodtidigitaldronedelivery.models;
 
 import com.tiago_silveirago.testepraticodtidigitaldronedelivery.constants.NivelPrioridade;
 import com.tiago_silveirago.testepraticodtidigitaldronedelivery.constants.StatusEntrega;
+import com.tiago_silveirago.testepraticodtidigitaldronedelivery.constants.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,11 +25,11 @@ public class Pedido {
     private String id;
     private String cliente;
 
-    @GeoSpatialIndexed
-    private Point localizacaoDestino;
+    @GeoSpatialIndexed()
+    private double[] localizacaoDestino;
 
     private Double pesoPacote;
     private NivelPrioridade nivelPrioridade;
-    private LocalDateTime dataPedido;
-    private StatusEntrega statusEntrega;
+    private LocalDateTime dataCriacao;
+    private StatusPedido  statusPedido;
 }

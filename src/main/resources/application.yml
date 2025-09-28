@@ -3,4 +3,4 @@ spring:
     name: teste-pratico-dti-digital-drone-delivery
   data:
     mongodb:
-      uri: mongodb://localhost:27017/drone_delivery
+      uri: mongodb://admin:admin123@localhost:27017/drone-delivery?authSource=admin
