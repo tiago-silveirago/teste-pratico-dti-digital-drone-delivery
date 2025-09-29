@@ -1,15 +1,15 @@
-package com.tiago_silveirago.testepraticodtidigitaldronedelivery.dtos;
+package com.tiago_silveirago.testepraticodtidigitaldronedelivery.dtos.pedido;
 
 import com.tiago_silveirago.testepraticodtidigitaldronedelivery.constants.NivelPrioridade;
-import com.tiago_silveirago.testepraticodtidigitaldronedelivery.constants.StatusEntrega;
-import org.springframework.data.geo.Point;
+import com.tiago_silveirago.testepraticodtidigitaldronedelivery.constants.StatusPedido;
 
 import java.time.LocalDateTime;
 
-public record PedidoResponseDTO(String cliente,
+public record PedidoResponseDTO(String id,
+                                String cliente,
                                 double[] localizacaoDestino,
                                 Double pesoPacote,
                                 NivelPrioridade nivelPrioridade,
                                 LocalDateTime dataCriacao,
-                                StatusEntrega statusEntrega) {
+                                StatusPedido statusPedido) {
 }

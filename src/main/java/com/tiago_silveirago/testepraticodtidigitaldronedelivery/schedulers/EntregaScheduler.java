@@ -1,6 +1,6 @@
 package com.tiago_silveirago.testepraticodtidigitaldronedelivery.schedulers;
 
-import com.tiago_silveirago.testepraticodtidigitaldronedelivery.services.EntregaService;
+import com.tiago_silveirago.testepraticodtidigitaldronedelivery.services.CriacaoEntregaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -13,11 +13,11 @@ import java.time.LocalDateTime;
 @Slf4j
 public class EntregaScheduler {
 
-    private final EntregaService entregaService;
+    private final CriacaoEntregaService criacaoEntregaService;
 
-    @Scheduled(cron = "*/5 * * * * *")
-    public void executarEntrega(){
+    @Scheduled(cron = "*/15 * * * * *")
+    public void executarEntrega() throws InterruptedException {
         log.info("Iniciando Nova Execução. Horário: {}", LocalDateTime.now());
-        entregaService.criarEntrega();
+        criacaoEntregaService.criarEntrega();
     }
 }

@@ -17,8 +17,9 @@ import java.util.List;
 public class Entrega {
 
     private String id;
-    private List<String> pedidoIds = new ArrayList<>();
     private StatusEntrega statusEntrega;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAtualizacao;
+    private List<DadosDoPedido> dadosDosPedidos = new ArrayList<>();
+    private String droneId;
 }

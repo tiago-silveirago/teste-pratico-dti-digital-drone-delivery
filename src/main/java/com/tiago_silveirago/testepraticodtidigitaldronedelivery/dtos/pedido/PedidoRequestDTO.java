@@ -1,4 +1,4 @@
-package com.tiago_silveirago.testepraticodtidigitaldronedelivery.dtos;
+package com.tiago_silveirago.testepraticodtidigitaldronedelivery.dtos.pedido;
 
 import com.tiago_silveirago.testepraticodtidigitaldronedelivery.constants.NivelPrioridade;
 import jakarta.validation.constraints.NotBlank;

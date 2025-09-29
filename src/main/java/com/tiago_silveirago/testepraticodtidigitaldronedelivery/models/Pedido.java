@@ -1,14 +1,11 @@
 package com.tiago_silveirago.testepraticodtidigitaldronedelivery.models;
 
 import com.tiago_silveirago.testepraticodtidigitaldronedelivery.constants.NivelPrioridade;
-import com.tiago_silveirago.testepraticodtidigitaldronedelivery.constants.StatusEntrega;
 import com.tiago_silveirago.testepraticodtidigitaldronedelivery.constants.StatusPedido;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,7 +14,6 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Document(collection = "pedidos")
 public class Pedido {
 

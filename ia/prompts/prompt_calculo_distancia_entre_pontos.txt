@@ -1,0 +1,30 @@
+<prompt>
+  <title>Função Java para cálculo de distância entre dois pontos</title>
+  <description>
+    Crie uma função em Java que receba dois pontos representados por arrays do tipo double[],
+    contendo coordenadas cartesianas (x, y). A função deve retornar a distância entre esses
+    dois pontos em quilômetros, considerando que 1 unidade no plano cartesiano equivale a 1 km.
+  </description>
+  <requirements>
+    <language>Java</language>
+    <input>
+      <pointA>double[] contendo coordenadas (x, y)</pointA>
+      <pointB>double[] contendo coordenadas (x, y)</pointB>
+    </input>
+    <output>
+      <distance>double representando a distância em km</distance>
+    </output>
+    <constraints>
+      <constraint>Assuma que os arrays sempre terão exatamente dois elementos.</constraint>
+      <constraint>Utilize a fórmula da distância euclidiana.</constraint>
+      <constraint>Não utilize bibliotecas externas.</constraint>
+    </constraints>
+  </requirements>
+  <example>
+    <input>
+      <pointA>{0.0, 0.0}</pointA>
+      <pointB>{3.0, 4.0}</pointB>
+    </input>
+    <output>5.0</output>
+  </example>
+</prompt>

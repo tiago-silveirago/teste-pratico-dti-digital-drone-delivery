@@ -17,4 +17,8 @@ public interface PedidoRepository extends MongoRepository<Pedido,String> {
     @Query("{ '_id': { $in: ?0 } }")
     @Update("{ '$set': { 'statusPedido': ?1 } }")
     long updateStatusByIds(List<String> ids, StatusPedido statusPedido);
+
+    @Query("{ '_id': { $eq: ?0 } }")
+    @Update("{ '$set': { 'statusPedido': ?1 } }")
+    long updateStatusById(String id, StatusPedido statusPedido);
 }

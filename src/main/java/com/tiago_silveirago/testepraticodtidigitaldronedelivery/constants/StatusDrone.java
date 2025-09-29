@@ -7,7 +7,6 @@ import lombok.Getter;
 @Getter
 public enum StatusDrone {
     IDDLE("IDDLE"),
-    CARREGANDO("CARREGANDO"),
     EM_VOO("EM_VOO"),
     ENTREGANDO("ENTREGANDO"),
     RETORNANDO("RETORNANDO");
