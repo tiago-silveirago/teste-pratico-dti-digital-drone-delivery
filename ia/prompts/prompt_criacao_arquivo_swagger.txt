@@ -1,0 +1,16 @@
+<prompt>
+  <task>Gerar documentação OpenAPI em formato YAML para Swagger</task>
+  <outputFormat>YAML</outputFormat>
+  <specification>OpenAPI 3.0.3</specification>
+  <info>
+    <title>API de Gestão Financeira</title>
+    <description>Documentação da API REST para a gerenciamento de entrega de drones.</description>
+    <version>1.0.0</version>
+  </info>
+  <servers>
+    <server>
+      <url>http://localhost:8080</url>
+      <description>Servidor local de desenvolvimento</description>
+    </server>
+  </servers>
+</prompt>

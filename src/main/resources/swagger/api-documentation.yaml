@@ -1,0 +1,460 @@
+openapi: 3.0.3
+info:
+  title: API de Gerenciamento de Entregas Por Drone
+  description: Documentação da API REST para a gerenciamento de entrega de drones.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Servidor local de desenvolvimento
+
+paths:
+  /v1/drones:
+    post:
+      summary: Criar drone
+      description: Cria um novo drone no sistema
+      tags:
+        - Drones
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DroneRequestDTO'
+            example:
+              nome: "Drone XPTO"
+              capacidadePeso: 10.0
+              capacidadeDeslocamento: 30.0
+      responses:
+        '204':
+          description: Drone criado com sucesso
+        '400':
+          description: Dados inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    get:
+      summary: Listar todos os drones
+      description: Retorna uma lista com todos os drones cadastrados
+      tags:
+        - Drones
+      responses:
+        '200':
+          description: Lista de drones retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DroneResponseDTO'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /v1/drones/{id}:
+    get:
+      summary: Buscar drone por ID
+      description: Retorna os dados de um drone específico
+      tags:
+        - Drones
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único do drone
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Drone encontrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DroneResponseDTO'
+        '404':
+          description: Drone não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /v1/pedidos:
+    post:
+      summary: Criar pedido
+      description: Cria um novo pedido no sistema
+      tags:
+        - Pedidos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PedidoRequestDTO'
+            example:
+              cliente: "João Silva"
+              localizacaoDestino: [-19.9208, -43.9378]
+              pesoPacote: 2.5
+              nivelPrioridade: "ALTA"
+      responses:
+        '204':
+          description: Pedido criado com sucesso
+        '400':
+          description: Dados inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    get:
+      summary: Listar todos os pedidos
+      description: Retorna uma lista com todos os pedidos cadastrados
+      tags:
+        - Pedidos
+      responses:
+        '200':
+          description: Lista de pedidos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PedidoResponseDTO'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /v1/pedidos/{id}:
+    get:
+      summary: Buscar pedido por ID
+      description: Retorna os dados de um pedido específico
+      tags:
+        - Pedidos
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único do pedido
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Pedido encontrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PedidoResponseDTO'
+        '404':
+          description: Pedido não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /v1/entregas:
+    get:
+      summary: Listar todas as entregas
+      description: Retorna uma lista com todas as entregas cadastradas
+      tags:
+        - Entregas
+      responses:
+        '200':
+          description: Lista de entregas retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EntregaResponseDTO'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /v1/entregas/{id}:
+    get:
+      summary: Buscar entrega por ID
+      description: Retorna os dados de uma entrega específica
+      tags:
+        - Entregas
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único da entrega
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Entrega encontrada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntregaResponseDTO'
+        '404':
+          description: Entrega não encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    DroneRequestDTO:
+      type: object
+      required:
+        - nome
+        - capacidadePeso
+        - capacidadeDeslocamento
+      properties:
+        nome:
+          type: string
+          description: Nome do drone
+          example: "Drone XPTO"
+        capacidadePeso:
+          type: number
+          format: double
+          description: Capacidade máxima de peso em kg
+          example: 10.0
+        capacidadeDeslocamento:
+          type: number
+          format: double
+          description: Capacidade máxima de deslocamento em km
+          example: 30.0
+
+    DroneResponseDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID único do drone
+          example: "507f1f77bcf86cd799439011"
+        nome:
+          type: string
+          description: Nome do drone
+          example: "Drone XPTO"
+        capacidadePeso:
+          type: number
+          format: double
+          description: Capacidade máxima de peso em kg
+          example: 10.0
+        capacidadeDeslocamento:
+          type: number
+          format: double
+          description: Capacidade máxima de deslocamento em km
+          example: 30.0
+        statusDrone:
+          $ref: '#/components/schemas/StatusDrone'
+        localizacaoAtual:
+          type: array
+          items:
+            type: number
+            format: double
+          description: Coordenadas atuais do drone [latitude, longitude]
+          example: [-19.9208, -43.9378]
+
+    PedidoRequestDTO:
+      type: object
+      required:
+        - cliente
+        - localizacaoDestino
+        - pesoPacote
+        - nivelPrioridade
+      properties:
+        cliente:
+          type: string
+          description: Nome do cliente
+          example: "João Silva"
+        localizacaoDestino:
+          type: array
+          items:
+            type: number
+            format: double
+          minItems: 2
+          maxItems: 2
+          description: Coordenadas de destino [latitude, longitude]
+          example: [-19.9208, -43.9378]
+        pesoPacote:
+          type: number
+          format: double
+          description: Peso do pacote em kg
+          example: 2.5
+        nivelPrioridade:
+          $ref: '#/components/schemas/NivelPrioridade'
+
+    PedidoResponseDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID único do pedido
+          example: "507f1f77bcf86cd799439011"
+        cliente:
+          type: string
+          description: Nome do cliente
+          example: "João Silva"
+        localizacaoDestino:
+          type: array
+          items:
+            type: number
+            format: double
+          description: Coordenadas de destino [latitude, longitude]
+          example: [-19.9208, -43.9378]
+        pesoPacote:
+          type: number
+          format: double
+          description: Peso do pacote em kg
+          example: 2.5
+        nivelPrioridade:
+          $ref: '#/components/schemas/NivelPrioridade'
+        dataCriacao:
+          type: string
+          format: date-time
+          description: Data de criação do pedido
+          example: "2024-01-15T10:30:00"
+        statusPedido:
+          $ref: '#/components/schemas/StatusPedido'
+
+    EntregaResponseDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID único da entrega
+          example: "507f1f77bcf86cd799439011"
+        statusEntrega:
+          $ref: '#/components/schemas/StatusEntrega'
+        dataCriacao:
+          type: string
+          format: date-time
+          description: Data de criação da entrega
+          example: "2024-01-15T10:30:00"
+        dataAtualizacao:
+          type: string
+          format: date-time
+          description: Data da última atualização da entrega
+          example: "2024-01-15T11:30:00"
+        dadosDosPedidos:
+          type: array
+          items:
+            $ref: '#/components/schemas/DadosDoPedido'
+          description: Lista de pedidos incluídos na entrega
+        droneId:
+          type: string
+          description: ID do drone responsável pela entrega
+          example: "507f1f77bcf86cd799439011"
+
+    DadosDoPedido:
+      type: object
+      properties:
+        pedidoId:
+          type: string
+          description: ID do pedido
+          example: "507f1f77bcf86cd799439011"
+        pontoDeEntrega:
+          type: array
+          items:
+            type: number
+            format: double
+          description: Coordenadas do ponto de entrega [latitude, longitude]
+          example: [-19.9208, -43.9378]
+        entregue:
+          type: boolean
+          description: Indica se o pedido foi entregue
+          example: false
+
+    StatusDrone:
+      type: string
+      enum:
+        - IDDLE
+        - EM_VOO
+        - ENTREGANDO
+        - RETORNANDO
+      description: Status atual do drone
+
+    StatusPedido:
+      type: string
+      enum:
+        - CRIADO
+        - EM_ANDAMENTO
+        - CONCLUIDO
+      description: Status atual do pedido
+
+    StatusEntrega:
+      type: string
+      enum:
+        - AGUARDANDO
+        - EM_ENTREGA
+        - ENTREGUE
+      description: Status atual da entrega
+
+    NivelPrioridade:
+      type: string
+      enum:
+        - ALTA
+        - MEDIA
+        - BAIXA
+      description: Nível de prioridade do pedido
+
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Mensagem de erro
+          example: "Recurso não encontrado"
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp do erro
+          example: "2024-01-15T10:30:00"
+        status:
+          type: integer
+          description: Código de status HTTP
+          example: 404
+
+tags:
+  - name: Drones
+    description: Operações relacionadas ao gerenciamento de drones
+  - name: Pedidos
+    description: Operações relacionadas ao gerenciamento de pedidos
+  - name: Entregas
+    description: Operações relacionadas ao gerenciamento de entregas
