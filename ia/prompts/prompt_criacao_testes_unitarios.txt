@@ -1,0 +1,92 @@
+<prompt>
+  <description>Gerar testes unitários para um projeto Java 21 com Spring Boot</description>
+  <language>Java</language>
+  <frameworks>
+    <framework>JUnit 5</framework>
+    <framework>Mockito</framework>
+    <extension>MockitoExtension</extension>
+  </frameworks>
+  <testingStyle>Objetivo e direto, sem exageros</testingStyle>
+  <testScope>
+    <controllers>Sim</controllers>
+    <services>Sim</services>
+    <repositories>Não (usar mocks para simular comportamento)</repositories>
+  </testScope>
+  <mocking>
+    <useMockito>Sim</useMockito>
+    <mockRepositories>Sim</mockRepositories>
+    <mockExternalDependencies>Sim</mockExternalDependencies>
+  </mocking>
+  <testCases>
+    <case>
+      <type>Sucesso</type>
+      <description>Testar comportamento esperado com dados válidos</description>
+    </case>
+    <case>
+      <type>Falha</type>
+      <description>Testar exceções lançadas ou retornos inválidos</description>
+    </case>
+    <case>
+      <type>Comportamento</type>
+      <description>Verificar se métodos de dependências são chamados corretamente</description>
+    </case>
+  </testCases>
+  <annotations>
+    <use>@ExtendWith(MockitoExtension.class)</use>
+    <use>@Mock</use>
+    <use>@InjectMocks</use>
+    <use>@Test</use>
+  </annotations>
+  <assertions>
+    <framework>Assertions do JUnit 5</framework>
+    <methods>assertEquals, assertThrows, assertTrue, assertFalse</methods>
+  </assertions>
+  <extras>
+    <coverage>Focar em métodos públicos</coverage>
+    <namingConvention>Deve seguir padrão: métodoASerTestado_Cenario_ResultadoEsperado</namingConvention>
+    <avoid>Evitar testes redundantes ou triviais</avoid>
+  </extras>
+  <classe>
+  package com.tiago_silveirago.testepraticodtidigitaldronedelivery.services;
+
+  import com.tiago_silveirago.testepraticodtidigitaldronedelivery.constants.StatusPedido;
+  import com.tiago_silveirago.testepraticodtidigitaldronedelivery.dtos.pedido.PedidoRequestDTO;
+  import com.tiago_silveirago.testepraticodtidigitaldronedelivery.dtos.pedido.PedidoResponseDTO;
+  import com.tiago_silveirago.testepraticodtidigitaldronedelivery.models.Pedido;
+  import com.tiago_silveirago.testepraticodtidigitaldronedelivery.repositories.PedidoRepository;
+  import lombok.RequiredArgsConstructor;
+  import org.springframework.stereotype.Service;
+
+  import java.util.List;
+
+  import static com.tiago_silveirago.testepraticodtidigitaldronedelivery.mappers.PedidoMapper.pedidoParaResponse;
+  import static com.tiago_silveirago.testepraticodtidigitaldronedelivery.mappers.PedidoMapper.requestParaPedido;
+
+  @Service
+  @RequiredArgsConstructor
+  public class PedidoService {
+
+      private final PedidoRepository pedidoRepository;
+
+      public void criar(PedidoRequestDTO request) {
+          Pedido pedido = requestParaPedido(request);
+          pedidoRepository.save(pedido);
+      }
+
+      public PedidoResponseDTO buscarPorId(String id) {
+          Pedido pedido = pedidoRepository.findById(id).orElseThrow(() -> new RuntimeException("ID de pedido inválido"));
+          return pedidoParaResponse(pedido);
+      }
+
+      public List<PedidoResponseDTO> buscarTodos() {
+          List<Pedido> pedidos = pedidoRepository.findAll();
+          return pedidoParaResponse(pedidos);
+      }
+
+      public List<Pedido> recuperarPedidosPorPrioridade() {
+          return pedidoRepository.findByStatusPedidoOrderByNivelPrioridadeAscDataCriacaoAsc(StatusPedido.CRIADO);
+      }
+
+  }
+  </classe>
+</prompt>

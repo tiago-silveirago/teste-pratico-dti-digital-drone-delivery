@@ -3,7 +3,6 @@ package com.tiago_silveirago.testepraticodtidigitaldronedelivery.services;
 import com.tiago_silveirago.testepraticodtidigitaldronedelivery.constants.StatusPedido;
 import com.tiago_silveirago.testepraticodtidigitaldronedelivery.dtos.pedido.PedidoRequestDTO;
 import com.tiago_silveirago.testepraticodtidigitaldronedelivery.dtos.pedido.PedidoResponseDTO;
-import com.tiago_silveirago.testepraticodtidigitaldronedelivery.mappers.PedidoMapper;
 import com.tiago_silveirago.testepraticodtidigitaldronedelivery.models.Pedido;
 import com.tiago_silveirago.testepraticodtidigitaldronedelivery.repositories.PedidoRepository;
 import lombok.RequiredArgsConstructor;

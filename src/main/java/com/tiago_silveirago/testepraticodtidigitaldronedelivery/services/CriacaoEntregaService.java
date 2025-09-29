@@ -92,7 +92,7 @@ public class CriacaoEntregaService {
 
             if (estaDentroDaCapacidadeDoDrone(capacidadePesoAtual, capacidadeDeslocamentoAtual, pedido, distanciaTotal)) {
                 log.info("Adicionando pedido na entrega: {}", pedido);
-                entrega.getDadosDosPedidos().add(new DadosDoPedido(pedido.getId(), pedido.getLocalizacaoDestino()));
+                entrega.getDadosDosPedidos().add(new DadosDoPedido(pedido.getId(), pedido.getLocalizacaoDestino(), false));
                 capacidadePesoAtual -= pedido.getPesoPacote();
                 capacidadeDeslocamentoAtual -= distanciaDronePedido;
                 ultimaLocalizacao = pedido.getLocalizacaoDestino();
